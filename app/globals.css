@@ -71,3 +71,5 @@ html.lenis, html.lenis body { height: auto; }
 @media (hover: hover) and (pointer: fine) {
   body.has-custom-cursor, body.has-custom-cursor * { cursor: none; }
 }
+
+.cursor-ring.cursor-grow { width: 64px; height: 64px; margin-left: -32px; margin-top: -32px; opacity: 0.6; }
