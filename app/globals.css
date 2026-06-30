@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #0a0908;
+  --color-bone: #f5f1ea;
+  --color-champagne: #c9a876;
+  --color-clay: #b07c5b;
+  --color-sage: #8a8c7a;
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a0908;
+  --fg: #f5f1ea;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* page bg transitions across acts via JS-set --bg */
+  transition: background-color 1.2s ease;
+  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+  font-weight: 500;
+}
+
+/* Display headline base */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+/* Fine champagne hairline */
+.hairline { height: 1px; background: color-mix(in srgb, var(--color-champagne) 60%, transparent); }
+
+/* Global grain overlay */
+.grain {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none;
+  background-image: url("/noise.svg");
+  opacity: 0.06; mix-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Hide native cursor only on devices with a fine pointer (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor, body.has-custom-cursor * { cursor: none; }
 }
