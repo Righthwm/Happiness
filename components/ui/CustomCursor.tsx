@@ -20,16 +20,24 @@ export default function CustomCursor() {
       if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px)`;
       raf = requestAnimationFrame(loop);
     };
-    const grow = () => ring.current?.classList.add("cursor-grow");
-    const shrink = () => ring.current?.classList.remove("cursor-grow");
+    // Event delegation: works for elements rendered after mount (e.g. the
+    // fullscreen menu links) and needs no per-element cleanup.
+    const interactive = "a, button, [data-cursor]";
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element)?.closest?.(interactive)) ring.current?.classList.add("cursor-grow");
+    };
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as Element)?.closest?.(interactive)) ring.current?.classList.remove("cursor-grow");
+    };
 
     window.addEventListener("mousemove", onMove);
-    document.querySelectorAll("a, button, [data-cursor]").forEach((el) => {
-      el.addEventListener("mouseenter", grow); el.addEventListener("mouseleave", shrink);
-    });
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
     raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
       cancelAnimationFrame(raf);
       document.body.classList.remove("has-custom-cursor");
     };
