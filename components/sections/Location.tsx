@@ -4,7 +4,11 @@ import { BRAND, HOURS } from "@/lib/content";
 
 export default function Location() {
   const [today, setToday] = useState<number>(-1);
-  useEffect(() => setToday(new Date().getDay()), []);
+  useEffect(() => {
+    // Compute the weekday client-side only, to avoid SSR/CSR hydration mismatch.
+    const id = requestAnimationFrame(() => setToday(new Date().getDay()));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const mapsQuery = encodeURIComponent(`${BRAND.addressLine}, ${BRAND.city}`);
 
