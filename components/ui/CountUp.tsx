@@ -11,7 +11,11 @@ export default function CountUp({ to, decimals = 0, suffix = "", className }: Pr
   useEffect(() => {
     const el = ref.current; if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { setVal(to); return; }
+    if (reduce) {
+      // Defer to next frame so we don't setState synchronously inside the effect.
+      const id = requestAnimationFrame(() => setVal(to));
+      return () => cancelAnimationFrame(id);
+    }
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !done.current) {
         done.current = true;

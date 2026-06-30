@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
+import { registerGsap, gsap } from "@/lib/gsap";
 import { GALLERY } from "@/lib/content";
 
 export default function Gallery() {

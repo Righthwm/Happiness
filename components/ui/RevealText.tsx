@@ -1,6 +1,6 @@
 "use client";
 import { ElementType, useEffect, useRef } from "react";
-import { registerGsap, gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+import { registerGsap, gsap, SplitText } from "@/lib/gsap";
 
 type Props = {
   children: string;

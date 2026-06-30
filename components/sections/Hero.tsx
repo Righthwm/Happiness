@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap";
+import { registerGsap, gsap } from "@/lib/gsap";
 import { BRAND, HERO_TITLES } from "@/lib/content";
 
 export default function Hero() {
