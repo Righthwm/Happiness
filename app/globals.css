@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0908;
+  --color-bone: #f5f1ea;
+  --color-champagne: #c9a876;
+  --color-clay: #b07c5b;
+  --color-sage: #8a8c7a;
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --bg: #0a0908;
+  --fg: #f5f1ea;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* page bg transitions across acts via JS-set --bg */
+  transition: background-color 1.2s ease;
+  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+  font-weight: 500;
+}
+
+/* Display headline base */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+/* Fine champagne hairline */
+.hairline { height: 1px; background: color-mix(in srgb, var(--color-champagne) 60%, transparent); }
+
+/* Global grain overlay */
+.grain {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none;
+  background-image: url("/noise.svg");
+  opacity: 0.06; mix-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Hide native cursor only on devices with a fine pointer (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor, body.has-custom-cursor * { cursor: none; }
+}
+
+.cursor-ring.cursor-grow { width: 64px; height: 64px; margin-left: -32px; margin-top: -32px; opacity: 0.6; }
+
+/* Labelled cursor over images: fills with champagne and shows a text bubble. */
+.cursor-ring.cursor-view {
+  width: 92px; height: 92px; margin-left: -46px; margin-top: -46px;
+  background: var(--color-champagne); border-color: transparent; opacity: 1;
+}
+.cursor-ring.cursor-view .cursor-label { opacity: 1; }
