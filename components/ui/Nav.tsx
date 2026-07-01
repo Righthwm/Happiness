@@ -62,6 +62,20 @@ export default function Nav() {
         </div>
       </header>
 
+      {/* Subtle mobile edge hint: swipe left (or tap) to open the menu */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Deschide meniul"
+          className="fixed right-0 top-1/2 z-[80] flex -translate-y-1/2 items-center gap-1 pl-4 pr-0 md:hidden"
+        >
+          <span className="edge-nudge text-lg leading-none text-[color-mix(in_srgb,var(--color-champagne)_75%,transparent)]" aria-hidden>
+            &lsaquo;
+          </span>
+          <span className="h-16 w-[3px] rounded-l-full bg-[color-mix(in_srgb,var(--color-champagne)_55%,transparent)]" aria-hidden />
+        </button>
+      )}
+
       <AnimatePresence>
         {open && (
           <motion.div
