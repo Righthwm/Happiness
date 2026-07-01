@@ -11,9 +11,10 @@ export default function Nav() {
   useEffect(() => {
     if (!open) return;
     let sx = 0, sy = 0;
-    const start = (e: TouchEvent) => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; };
+    const start = (e: TouchEvent) => { const t = e.touches[0]; if (!t) return; sx = t.clientX; sy = t.clientY; };
     const end = (e: TouchEvent) => {
       const t = e.changedTouches[0];
+      if (!t) return;
       const dx = t.clientX - sx;
       const dy = t.clientY - sy;
       if (dx > 70 && Math.abs(dx) > Math.abs(dy)) setOpen(false);
