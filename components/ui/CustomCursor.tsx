@@ -56,8 +56,8 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={dot} aria-hidden className="pointer-events-none fixed left-0 top-0 z-[70] h-1.5 w-1.5 -ml-[3px] -mt-[3px] rounded-full bg-[var(--color-champagne)]" />
-      <div ref={ring} aria-hidden className="cursor-ring pointer-events-none fixed left-0 top-0 z-[70] flex h-9 w-9 -ml-[18px] -mt-[18px] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--color-champagne)_60%,transparent)] transition-[width,height,opacity,background-color] duration-300">
+      <div ref={dot} aria-hidden className="pointer-events-none fixed left-0 top-0 z-[95] h-1.5 w-1.5 -ml-[3px] -mt-[3px] rounded-full bg-[var(--color-champagne)]" />
+      <div ref={ring} aria-hidden className="cursor-ring pointer-events-none fixed left-0 top-0 z-[95] flex h-9 w-9 -ml-[18px] -mt-[18px] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--color-champagne)_60%,transparent)] transition-[width,height,opacity,background-color] duration-300">
         <span ref={label} className="cursor-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[var(--color-ink)] opacity-0" />
       </div>
     </>

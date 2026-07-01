@@ -44,7 +44,7 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[90] flex flex-col bg-[var(--color-ink)]"
+            className="fixed inset-0 z-[90] flex flex-col bg-[color-mix(in_srgb,#141110_82%,transparent)] backdrop-blur-2xl"
             initial={{ clipPath: "circle(0% at 100% 0%)" }}
             animate={{ clipPath: "circle(150% at 100% 0%)" }}
             exit={{ clipPath: "circle(0% at 100% 0%)" }}
@@ -52,27 +52,35 @@ export default function Nav() {
           >
             <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5">
               <span className="display text-xl text-[var(--color-bone)]">{BRAND.name}</span>
-              <button onClick={() => setOpen(false)} className="eyebrow text-[var(--color-bone)]" aria-label="Închide meniul">
-                Închide ✕
+              <button onClick={() => setOpen(false)} className="eyebrow flex items-center gap-2 text-[var(--color-bone)] transition-colors hover:text-[var(--color-champagne)]" aria-label="Închide meniul">
+                Închide <span aria-hidden>✕</span>
               </button>
             </div>
-            <nav className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-2 px-6">
+            <nav className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-1 px-6 md:gap-2">
               {NAV_LINKS.map((l, i) => (
                 <motion.a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="display w-fit text-5xl text-[var(--color-bone)] transition-colors hover:text-[var(--color-champagne)] md:text-7xl"
+                  className="group flex w-fit items-baseline gap-4 py-1 transition-transform duration-300 ease-out hover:translate-x-3 md:gap-7"
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.25 + i * 0.07, duration: 0.6, ease: "easeOut" }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{ delay: 0.28 + i * 0.07, duration: 0.6, ease: "easeOut" }}
                 >
-                  {l.label}
+                  <span className="w-8 pt-2 text-right text-xs tracking-[0.2em] text-[color-mix(in_srgb,var(--color-champagne)_80%,transparent)] transition-colors duration-300 group-hover:text-[var(--color-champagne)]">
+                    0{i + 1}
+                  </span>
+                  <span className="relative display text-5xl leading-[1.05] text-[var(--color-bone)]/90 transition-colors duration-300 group-hover:text-[var(--color-champagne)] md:text-7xl">
+                    {l.label}
+                    <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--color-champagne)] transition-[width] duration-500 ease-out group-hover:w-full" />
+                  </span>
                 </motion.a>
               ))}
             </nav>
-            <div className="mx-auto w-full max-w-7xl px-6 py-8 eyebrow text-[var(--color-bone)]">
-              {BRAND.addressLine} · {BRAND.city}
+            <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-8">
+              <span className="eyebrow normal-case tracking-[0.2em] text-[var(--color-bone)]/60">{BRAND.addressLine} · {BRAND.city}</span>
+              <a href={BRAND.instagram} target="_blank" rel="noreferrer" className="eyebrow normal-case tracking-[0.2em] text-[var(--color-bone)]/60 transition-colors hover:text-[var(--color-champagne)]">{BRAND.instagramHandle}</a>
             </div>
           </motion.div>
         )}
