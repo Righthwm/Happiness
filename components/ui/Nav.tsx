@@ -7,9 +7,8 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
-  // Mobile: close the menu with a right-swipe (native listeners, active while open).
+  // Mobile gestures: swipe-left opens the menu, swipe-right closes it.
   useEffect(() => {
-    if (!open) return;
     let sx = 0, sy = 0;
     const start = (e: TouchEvent) => { const t = e.touches[0]; if (!t) return; sx = t.clientX; sy = t.clientY; };
     const end = (e: TouchEvent) => {
@@ -17,7 +16,9 @@ export default function Nav() {
       if (!t) return;
       const dx = t.clientX - sx;
       const dy = t.clientY - sy;
-      if (dx > 70 && Math.abs(dx) > Math.abs(dy)) setOpen(false);
+      if (Math.abs(dx) <= Math.abs(dy) || Math.abs(dx) < 70) return; // ignore vertical / small
+      if (open && dx > 0) setOpen(false);      // swipe right → close
+      else if (!open && dx < 0) setOpen(true); // swipe left → open
     };
     document.addEventListener("touchstart", start, { passive: true });
     document.addEventListener("touchend", end, { passive: true });
