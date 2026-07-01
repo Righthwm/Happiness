@@ -7,6 +7,25 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
+  // Mobile: close the menu with a right-swipe (native listeners, active while open).
+  useEffect(() => {
+    if (!open) return;
+    let sx = 0, sy = 0;
+    const start = (e: TouchEvent) => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; };
+    const end = (e: TouchEvent) => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx;
+      const dy = t.clientY - sy;
+      if (dx > 70 && Math.abs(dx) > Math.abs(dy)) setOpen(false);
+    };
+    document.addEventListener("touchstart", start, { passive: true });
+    document.addEventListener("touchend", end, { passive: true });
+    return () => {
+      document.removeEventListener("touchstart", start);
+      document.removeEventListener("touchend", end);
+    };
+  }, [open]);
+
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.7);
     onScroll();
@@ -44,7 +63,7 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[90] flex flex-col bg-[color-mix(in_srgb,#141110_82%,transparent)] backdrop-blur-2xl"
+            className="fixed inset-0 z-[90] flex flex-col bg-[color-mix(in_srgb,#141110_66%,transparent)] backdrop-blur-2xl"
             initial={{ clipPath: "circle(0% at 100% 0%)" }}
             animate={{ clipPath: "circle(150% at 100% 0%)" }}
             exit={{ clipPath: "circle(0% at 100% 0%)" }}
