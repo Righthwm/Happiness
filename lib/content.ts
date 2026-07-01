@@ -52,7 +52,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Pentru ea & pentru el",
     title: "Epilare definitivă",
     body: "Tehnologie laser de ultimă generație pentru o piele netedă, durabil. Full body sau zone individuale, în deplină siguranță.",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1519824145371-296894a0daa9?q=80&w=1600&auto=format&fit=crop",
     alt: "Detaliu de piele netedă în lumină difuză",
   },
   {
@@ -76,7 +76,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Detaliu",
     title: "Manichiură & Pedichiură",
     body: "De la oja semipermanentă și construcție în gel la pedichiură SPA de lux. Servicii dedicate și pentru bărbați.",
-    image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?q=80&w=1600&auto=format&fit=crop",
     alt: "Manichiură rafinată",
   },
   {
@@ -84,7 +84,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Lumină",
     title: "Cosmetică & îngrijire facială",
     body: "Tratamente faciale, masaj facial și laminare de sprâncene și gene pentru un ten odihnit, radiant.",
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1600&auto=format&fit=crop",
     alt: "Tratament facial într-un cadru elegant",
   },
   {
@@ -92,7 +92,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Semnătură",
     title: "Micropigmentare",
     body: "Sprâncene și buze definite natural, cu tehnici fine și pigmenți de calitate. Serviciul nostru semnătură.",
-    image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=1600&auto=format&fit=crop",
     alt: "Detaliu de privire și sprâncene definite",
   },
   {
@@ -100,7 +100,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Privire",
     title: "Gene & Sprâncene",
     body: "Extensii Natural, Soft sau Mega Volume, stilizare, laminare și vopsit — pentru o privire intensă, fără efort zilnic.",
-    image: "https://images.unsplash.com/photo-1583001931096-959e9a1a6223?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1600&auto=format&fit=crop",
     alt: "Detaliu gene și privire",
   },
   {
@@ -108,7 +108,7 @@ export const RITUALS: Ritual[] = [
     eyebrow: "Eveniment",
     title: "Make-up & Hairstyling",
     body: "Machiaj de zi, de seară sau de mireasă, coafură și cursuri de self make-up. Pentru momentele care contează.",
-    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=1600&auto=format&fit=crop",
     alt: "Pregătire make-up și coafură",
   },
   {
@@ -141,11 +141,11 @@ export const REVIEWS: Review[] = [
 
 // Salon interior atmosphere — TODO(owner): real interior photos.
 export const GALLERY: { image: string; alt: string }[] = [
-  { image: "https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?q=80&w=1600&auto=format&fit=crop", alt: "Interior salon, detaliu de lumină caldă" },
+  { image: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?q=80&w=1600&auto=format&fit=crop", alt: "Interior salon, detaliu de lumină caldă" },
   { image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1600&auto=format&fit=crop", alt: "Spațiu de tratament minimalist" },
   { image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1600&auto=format&fit=crop", alt: "Detaliu de design interior" },
-  { image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1600&auto=format&fit=crop", alt: "Atmosferă senzorială" },
-  { image: "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?q=80&w=1600&auto=format&fit=crop", alt: "Zonă de relaxare" },
+  { image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1600&auto=format&fit=crop", alt: "Atmosferă senzorială" },
+  { image: "https://images.unsplash.com/photo-1470259078422-826894b933aa?q=80&w=1600&auto=format&fit=crop", alt: "Zonă de relaxare" },
 ];
 
 export const NAV_LINKS = [
