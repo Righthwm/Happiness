@@ -47,13 +47,26 @@ export default function Hero() {
         >
           {BRAND.legal} — {BRAND.city.toUpperCase()}
         </motion.p>
-        <motion.h1
-          className="display mt-6 max-w-5xl text-[clamp(2.8rem,9vw,9rem)] text-[var(--color-bone)]"
-          initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.15, duration: 1.1, ease: "easeOut" }}
-        >
-          {HERO_TITLES[0]}
-        </motion.h1>
+        <h1 className="display mt-6 flex max-w-5xl flex-wrap justify-center gap-x-[0.28em] text-[clamp(2.8rem,9vw,9rem)] text-[var(--color-bone)]">
+          {/* Per-word mask reveal: each word rises out of a clipped line. */}
+          {HERO_TITLES[0].split(" ").map((word, i) => (
+            <span key={i} className="inline-block overflow-hidden pb-[0.12em]">
+              <motion.span
+                className="inline-block"
+                initial={{ y: "115%" }}
+                animate={{ y: 0 }}
+                transition={{ delay: 2.05 + i * 0.09, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
+        <motion.div
+          className="mx-auto mt-4 h-px w-40 origin-center bg-[var(--color-champagne)]"
+          initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+          transition={{ delay: 2.7, duration: 1.0, ease: "easeInOut" }}
+        />
 
         <motion.div
           className="mt-10 flex items-center gap-3 text-[var(--color-bone)]"
