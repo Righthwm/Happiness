@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 export default function CustomCursor() {
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
+  const label = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -20,14 +21,24 @@ export default function CustomCursor() {
       if (ring.current) ring.current.style.transform = `translate(${rx}px, ${ry}px)`;
       raf = requestAnimationFrame(loop);
     };
-    // Event delegation: works for elements rendered after mount (e.g. the
-    // fullscreen menu links) and needs no per-element cleanup.
+
+    // Event delegation: works for elements rendered after mount and needs no
+    // per-element cleanup. Elements with [data-cursor-label] show a text bubble.
     const interactive = "a, button, [data-cursor]";
     const onOver = (e: MouseEvent) => {
-      if ((e.target as Element)?.closest?.(interactive)) ring.current?.classList.add("cursor-grow");
+      const target = e.target as Element;
+      const labelled = target?.closest?.("[data-cursor-label]") as HTMLElement | null;
+      if (labelled && ring.current && label.current) {
+        label.current.textContent = labelled.dataset.cursorLabel || "";
+        ring.current.classList.add("cursor-view");
+      } else if (target?.closest?.(interactive)) {
+        ring.current?.classList.add("cursor-grow");
+      }
     };
     const onOut = (e: MouseEvent) => {
-      if ((e.target as Element)?.closest?.(interactive)) ring.current?.classList.remove("cursor-grow");
+      const target = e.target as Element;
+      if (target?.closest?.("[data-cursor-label]")) ring.current?.classList.remove("cursor-view");
+      else if (target?.closest?.(interactive)) ring.current?.classList.remove("cursor-grow");
     };
 
     window.addEventListener("mousemove", onMove);
@@ -46,7 +57,9 @@ export default function CustomCursor() {
   return (
     <>
       <div ref={dot} aria-hidden className="pointer-events-none fixed left-0 top-0 z-[70] h-1.5 w-1.5 -ml-[3px] -mt-[3px] rounded-full bg-[var(--color-champagne)]" />
-      <div ref={ring} aria-hidden className="cursor-ring pointer-events-none fixed left-0 top-0 z-[70] h-9 w-9 -ml-[18px] -mt-[18px] rounded-full border border-[color-mix(in_srgb,var(--color-champagne)_60%,transparent)] transition-[width,height,opacity] duration-300" />
+      <div ref={ring} aria-hidden className="cursor-ring pointer-events-none fixed left-0 top-0 z-[70] flex h-9 w-9 -ml-[18px] -mt-[18px] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--color-champagne)_60%,transparent)] transition-[width,height,opacity,background-color] duration-300">
+        <span ref={label} className="cursor-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[var(--color-ink)] opacity-0" />
+      </div>
     </>
   );
 }

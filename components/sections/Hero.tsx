@@ -9,22 +9,41 @@ export default function Hero() {
   const section = useRef<HTMLElement>(null);
   const bg = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
+  const curtain = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     registerGsap();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = gsap.context(() => {
-      // Parallax depth: bg moves slower, content drifts up + fades
-      gsap.to(bg.current, {
-        yPercent: 18, scale: 1.12, ease: "none",
-        scrollTrigger: { trigger: section.current, start: "top top", end: "bottom top", scrub: true },
+    const mm = gsap.matchMedia();
+
+    // Desktop: pin the hero and play a "curtain" handoff — the image zooms, the
+    // content lifts and fades, and an ink panel with a rounded top rises to
+    // reveal the story beneath.
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: section.current, start: "top top", end: "+=90%", scrub: true, pin: true, invalidateOnRefresh: true },
       });
-      gsap.to(content.current, {
-        yPercent: -28, opacity: 0, ease: "none",
-        scrollTrigger: { trigger: section.current, start: "top top", end: "bottom top", scrub: true },
-      });
-    }, section);
-    return () => ctx.revert();
+      tl.to(bg.current, { scale: 1.2, yPercent: 6, ease: "none", duration: 1 }, 0);
+      tl.to(content.current, { yPercent: -16, opacity: 0, ease: "none", duration: 0.45 }, 0);
+      tl.fromTo(curtain.current, { yPercent: 100 }, { yPercent: 0, ease: "power2.inOut", duration: 0.72 }, 0.28);
+      return () => { tl.scrollTrigger?.kill(); tl.kill(); };
+    });
+
+    // Mobile: lighter parallax fade, no pin (smoother on touch).
+    mm.add("(max-width: 767px)", () => {
+      const ctx = gsap.context(() => {
+        gsap.to(bg.current, {
+          yPercent: 18, scale: 1.12, ease: "none",
+          scrollTrigger: { trigger: section.current, start: "top top", end: "bottom top", scrub: true },
+        });
+        gsap.to(content.current, {
+          yPercent: -28, opacity: 0, ease: "none",
+          scrollTrigger: { trigger: section.current, start: "top top", end: "bottom top", scrub: true },
+        });
+      }, section);
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -78,6 +97,15 @@ export default function Hero() {
             din peste {BRAND.reviewCount.toLocaleString("ro-RO")} de recenzii
           </span>
         </motion.div>
+      </div>
+
+      {/* Curtain that rises to hand off into the story (desktop pin) */}
+      <div
+        ref={curtain}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-30 translate-y-full rounded-t-[3rem] bg-[var(--color-ink)]"
+      >
+        <div className="absolute inset-x-0 top-0 h-px bg-[color-mix(in_srgb,var(--color-champagne)_50%,transparent)]" />
       </div>
 
       {/* Scroll indicator */}

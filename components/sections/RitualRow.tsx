@@ -47,6 +47,14 @@ export default function RitualRow({ r, index, reversed }: { r: Ritual; index: nu
         <div ref={img} className="absolute inset-x-0 -top-[10%] h-[120%] will-change-transform">
           <Image src={r.image} alt={r.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
         </div>
+        <a
+          href={BRAND.meroUrl}
+          target="_blank"
+          rel="noreferrer"
+          data-cursor-label="Programează"
+          aria-label={`Programează — ${r.title}`}
+          className="absolute inset-0 z-10"
+        />
       </div>
 
       <div className={`relative ${reversed ? "md:pr-6" : "md:pl-6"}`}>

@@ -73,3 +73,10 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 .cursor-ring.cursor-grow { width: 64px; height: 64px; margin-left: -32px; margin-top: -32px; opacity: 0.6; }
+
+/* Labelled cursor over images: fills with champagne and shows a text bubble. */
+.cursor-ring.cursor-view {
+  width: 92px; height: 92px; margin-left: -46px; margin-top: -46px;
+  background: var(--color-champagne); border-color: transparent; opacity: 1;
+}
+.cursor-ring.cursor-view .cursor-label { opacity: 1; }
